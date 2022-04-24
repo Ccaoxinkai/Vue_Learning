@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <my-cpn2></my-cpn2>
+    </div>
+    <template id="cpn2">
+        <div>
+            {{message}}
+        </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        //创建组件化构造器对象；
+        //注册组件;
+        //为什么data为函数
+        //原因：如果data不为函数，只为对象时；考虑到组件作用是为了方便多个画面公用的情况，如果data为对象，则作用域就会不同，这样导致多个画面公用一个data对象
+        Vue.component("my-cpn2",{
+            template:'#cpn2',
+            data() {
+                return {
+                    message:"Hello Vue Template"
+                }
+            },
+        })
+        const app = new Vue({
+            el:'#app',
+        })
+    </script>
+</body>
+</html>

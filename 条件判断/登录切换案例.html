@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!--登录切换案例时、会出现input输入框中的值不会因为切换而清空-->
+        <!--因为vue在加载Dom时会先加载到虚拟Dom中但是不会将input框中的值进行对比，可以通过key属性设置值来更改标签-->
+        <div v-if="isShow">
+            <label>用户名</label>
+            <input type="text" key="username">
+        </div>
+        <div v-else>
+            <label>邮箱地址</label>
+            <input type="text"  key="email">
+        </div>
+        <button @click="btnClick">切换登录方式</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            isShow:true
+        },
+        methods:{
+            btnClick(){
+                this.isShow = !this.isShow
+                console.log(this.isShow);
+            }
+        }
+    })
+    </script>
+</body>
+</html>

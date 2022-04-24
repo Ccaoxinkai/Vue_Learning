@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        
+        <my-cpn2 :c-message="message"></my-cpn2>
+    </div>
+    <template id="cpn2">
+        <div>
+            {{cMessage}}
+        </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        //创建组件化构造器对象；
+        //注册组件；
+        Vue.component("my-cpn2",{
+            template:'#cpn2',
+            data() {
+                return {
+                }
+            },
+            //第一种，定义数组存放组件的属性名；
+            //props:['cmessage']
+            //第二种，定义props对象
+            props:{
+                //可以定义父组件传过来的类型
+                //cmessage:String\
+                //如果属性名为驼峰是标识的话，页面中会用警告信息，原因v-bind不支持驼峰式表示；解决办法是将v-bind绑定的标识符改为c-message形式
+                cMessage:{
+                    type:String,
+                    //定义组件默认值
+                    default:"welcome"
+                    //定义父组件是否必须传递数值
+                    //required:true
+                }
+            }
+        })
+        const app = new Vue({
+            el:'#app',
+            data:{
+                message:"hello vue template"
+            }
+        })
+    </script>
+</body>
+</html>

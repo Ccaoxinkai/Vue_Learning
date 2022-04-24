@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!--.stop修饰符的使用-->
+        <div @click="divClick">
+            div事件监听
+            <button @click.stop="btnClick">按钮</button>
+        </div>
+
+        <!--.prevent阻止默认事件提交-->
+        <form action="baidu">
+            <input type="submit" value="提交" @click.prevent="sumbit">
+        </form>
+
+        <!--监听某个键盘的键帽-->
+        <input type="text" @keyUp.enter="keyUpClick">
+
+        <!--.once修饰符使用-->
+        <button @click.once="btnClick">按钮2</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+    const app = new Vue({
+      el:'#app',
+      methods:{
+        divClick(){
+            console.log("divClick");
+        },
+        btnClick(){
+            console.log("btnClick");
+        },
+        sumbit(){
+            console.log("sumbit");
+        },
+        keyUpClick(){
+            console.log("keyUpClick");
+        }
+      }
+    })
+    </script>
+</body>
+</html>

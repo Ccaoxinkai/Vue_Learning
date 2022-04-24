@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .library{
+            border: 1px solid black;
+        }
+        td{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <table class="library">
+            <tr>
+                <td>序号</td>
+                <td>书籍名称</td>
+                <td>出版日期</td>
+                <td>价格</td>
+                <td>购买数量</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for="(book,index) in books" :key="book.name">
+                <td>{{index+1}}</td>
+                <td>{{book.name}}</td>
+                <td>{{book.date}}</td>
+                <td>{{book.price | showPrice}}</td>
+                <td>
+                    <button @click="decrement(book.price,index)" v-bind:disabled="book.count===1">-</button>
+                    {{book.count}}
+                    <button @click="increment(book.price,index)">+</button>
+                </td>
+                <td>
+                    <button @click="remove(index)">Delete</button>
+                </td>
+            </tr>
+        </table>
+        总价格：{{totalPrice | showPrice}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+    const app = new Vue({
+      el:'#app',
+      data:{
+        books:[
+            {name:"<<算法导论>>",date:"2001-2-3",price:12,count:1},
+            {name:"<<UNIX编程技术>>",date:"2001-2-4",price:10,count:1},
+            {name:"<<编程珠玑>>",date:"2003-2-4",price:103,count:1},
+            {name:"<<代码大全>>",date:"2011-2-4",price:102,count:1}
+        ],
+      },
+      methods:{
+        increment(price,index){
+            this.books[index].count++;
+        },
+        decrement(price,index){
+            this.books[index].count--;
+        },
+        remove(index){
+            this.books.splice(index,1);
+        }
+      },
+      filters:{
+        showPrice(price){
+            return '$'+price;
+        }
+      },
+      computed:{
+        //   totalPrice(){
+        //     let total = 0
+        //     for (const book in this.books) {
+        //         total += this.books[book].price*this.books[book].count;
+        //     }
+        //     return total
+        //   }
+            totalPrice(){
+                let total = 0
+                for (const book of this.books) {
+                    total += book.price*book.count;
+                }
+                return total
+          }        
+        }
+    })
+    //filter/map/reduce
+    //filter中的回调函数、必须返回一个boolean值
+    </script>
+</body>
+</html>

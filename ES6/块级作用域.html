@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+    
+    <script>
+        //变量作用域：变量在什么范围是可用的
+        // {
+        //     var name = 'why';
+        //     console.log(name);
+        // }
+        // console.log(name);
+        
+        //没有块级作用域引起的问题：for的块级
+        // var btns = document.getElementsByTagName('button');
+        // for(var i = 0; i<btns.length;i++){
+        //     btns[i].addEventListener('click',function(){
+        //         console.log("第"+i+"个按钮被点击")
+        //     })
+        // }
+
+        //之前的解决办法  闭包
+        //为什么闭包可以解决问题：因为函数是一个作用域
+        // var btns = document.getElementsByTagName('button');
+        // for(var i = 0; i<btns.length;i++){
+        //     (function(i){
+        //         btns[i].addEventListener('click',function(){
+        //         console.log("第"+i+"个按钮被点击")
+        //         })
+        //     })(i)
+        // }
+
+        //ES6 中使用let const
+        const btns = document.getElementsByTagName('button');
+        for(let i = 0; i<btns.length;i++){
+            btns[i].addEventListener('click',function(){
+                console.log("第"+i+"个按钮被点击")
+            })
+        }
+
+    </script>
+</body>
+</html>
